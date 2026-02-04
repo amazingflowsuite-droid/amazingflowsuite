@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { Play, Pause, SkipForward, Maximize2, Minimize2 } from 'lucide-react';
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -8,9 +7,8 @@ import { usePiP } from '@/hooks/usePiP';
 import { createPortal } from 'react-dom';
 
 export const ActiveSpeaker = () => {
-    const { activeMemberId, members, secondsRemaining, speakerLimit, status, pauseDaily, resumeDaily, nextSpeaker } = useDailyStore();
+    const { activeMemberId, members, secondsRemaining, status, pauseDaily, resumeDaily, nextSpeaker } = useDailyStore();
     const { requestPiP, closePiP, isActive, pipWindow } = usePiP();
-    const contentRef = useRef<HTMLDivElement>(null);
 
     const activeMember = members.find(m => m.id === activeMemberId);
 
@@ -27,7 +25,7 @@ export const ActiveSpeaker = () => {
 
     // --- STANDARD DASHBOARD LAYOUT ---
     const SpeakerContentFull = (
-        <div className="flex flex-col items-center justify-center space-y-8 py-8 h-full" ref={contentRef}>
+        <div className="flex flex-col items-center justify-center space-y-8 py-8 h-full">
             {/* Timer Ring */}
             <div className="relative flex items-center justify-center">
                 <div className="absolute inset-0 rounded-full border-8 border-muted opacity-20" />
@@ -123,7 +121,7 @@ export const ActiveSpeaker = () => {
     return (
         <Card className="border-border/50 shadow-2xl bg-gradient-to-b from-card/50 to-background border-t-primary/20 h-full relative overflow-hidden">
             <div className="absolute top-4 right-4 z-20">
-                <Button size="icon" variant="ghost" onClick={() => isActive ? closePiP() : requestPiP(contentRef)}>
+                <Button size="icon" variant="ghost" onClick={() => isActive ? closePiP() : requestPiP()}>
                     {isActive ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
                 </Button>
             </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
     LayoutDashboard,
     Users,
@@ -18,12 +18,12 @@ import { AudioController } from './components/AudioController';
 import { useDailyStore } from './store/useDailyStore';
 
 export const DailyModule = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [isSidebarOpen] = useState(true);
     const { startDaily, status, resetDaily, currentView, setCurrentView, tick, globalSecondsRemaining } = useDailyStore();
 
     // Global Timer Loop
     useEffect(() => {
-        let interval: NodeJS.Timeout;
+        let interval: ReturnType<typeof setInterval>;
         if (status === 'running') {
             interval = setInterval(() => {
                 tick();

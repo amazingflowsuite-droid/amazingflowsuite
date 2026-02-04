@@ -1,8 +1,6 @@
-import React from 'react';
 import { Users, GripVertical } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useDailyStore } from '../store/useDailyStore';
-import { cn } from '@/lib/utils';
 
 export const TeamQueue = () => {
     const { queue, members, activeMemberId } = useDailyStore();

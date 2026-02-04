@@ -1,10 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 export const usePiP = () => {
     const [isActive, setIsActive] = useState(false);
     const [pipWindow, setPipWindow] = useState<Window | null>(null);
 
-    const requestPiP = useCallback(async (contentRef: React.RefObject<HTMLElement>) => {
+    const requestPiP = useCallback(async () => {
         if (!('documentPictureInPicture' in window)) {
             alert("Your browser doesn't support Document Picture-in-Picture API yet.");
             return;

@@ -1,5 +1,4 @@
-import React from 'react';
-import { Clock, Volume2, Monitor } from 'lucide-react';
+import { Clock, Volume2 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -8,7 +7,7 @@ import { useDailyStore } from '../store/useDailyStore';
 export const SettingsView = () => {
     // This would need extending the store to allow setting time limit, 
     // but for now we mocked speakerLimit as 120s in store state.
-    const { speakerLimit, setSpeakerLimit, timeboxMode, setTimeboxMode, globalTimeLimit, setGlobalTimeLimit, members } = useDailyStore();
+    const { speakerLimit, setSpeakerLimit, timeboxMode, setTimeboxMode, globalTimeLimit, members } = useDailyStore();
 
     const calculatedTime = timeboxMode === 'auto' && members.length > 0
         ? Math.floor(globalTimeLimit / members.length)
