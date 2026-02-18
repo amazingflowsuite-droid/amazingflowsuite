@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Amazing Planning Dashboard</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Font Awesome for Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            emerald: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              400: '#34d399',
+              500: '#10b981', // Primary Green
+              600: '#059669',
+            },
+            blue: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom CSS for Circular Progress -->
+<style data-purpose="charts">
+    .circular-chart {
+      display: block;
+      margin: 0 auto;
+      max-width: 80%;
+      max-height: 250px;
+    }
+    .circle-bg {
+      fill: none;
+      stroke: #ecfdf5; /* Light emerald trace */
+      stroke-width: 2.5;
+    }
+    .circle {
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      animation: progress 1s ease-out forwards;
+    }
+    @keyframes progress {
+      0% { stroke-dasharray: 0 100; }
+    }
+    .percentage {
+      fill: #059669; /* text-emerald-600 */
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.6em; /* Increased size */
+      text-anchor: middle;
+    }
+    .sub-text {
+      fill: #9ca3af;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.15em;
+      text-anchor: middle;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-700 h-screen flex flex-col overflow-hidden">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-6 shrink-0 z-20">
+<!-- Left: Brand Identity -->
+<div class="flex items-center gap-4">
+<button class="text-gray-400 hover:text-gray-600 transition">
+<i class="fa-solid fa-arrow-left"></i>
+</button>
+<div class="flex items-center gap-3">
+<!-- Logo Icon -->
+<div class="bg-emerald-50 text-emerald-500 rounded-lg w-10 h-10 flex items-center justify-center text-xl">
+<i class="fa-solid fa-table-columns"></i>
+</div>
+<div>
+<h1 class="font-bold text-lg leading-tight text-xl font-bold text-emerald-600">Amazing Planning</h1>
+<p class="text-sm text-gray-500 font-medium">Scrum Timekeeper</p>
+</div>
+</div>
+</div>
+<!-- Right: Navigation Actions -->
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-2 text-gray-600 hover:text-emerald-500 font-medium transition text-sm">
+<i class="fa-regular fa-calendar"></i>
+<span>Timeline</span>
+</button>
+<button class="flex items-center gap-2 border border-gray-300 rounded-lg px-4 py-1.5 text-sm font-medium hover:bg-gray-50 transition">
+<i class="fa-regular fa-file-lines"></i>
+<span>Report</span>
+</button>
+<div class="flex items-center gap-4 text-gray-400">
+<button class="hover:text-gray-600 transition"><i class="fa-solid fa-gear"></i></button>
+<button class="hover:text-gray-600 transition"><i class="fa-regular fa-circle-question"></i></button>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 flex overflow-hidden p-6 gap-6">
+<!-- BEGIN: LeftColumn (Product Backlog) -->
+<section class="flex flex-col w-5/12 bg-white rounded-xl shadow-sm border border-gray-200 h-full overflow-hidden" data-purpose="product-backlog-panel">
+<!-- Backlog Header -->
+<div class="p-4 border-b border-gray-100 flex justify-between items-center bg-white shrink-0">
+<div class="flex items-center gap-2 text-gray-800 font-semibold text-lg">
+<i class="fa-solid fa-list-check text-emerald-500"></i>
+<h2>Product Backlog</h2>
+</div>
+<button class="flex items-center gap-2 border border-gray-300 rounded-md px-3 py-1 text-xs font-medium hover:bg-gray-50 transition text-gray-600">
+<i class="fa-solid fa-upload"></i>
+<span>Import</span>
+</button>
+</div>
+<!-- Search Bar -->
+<div class="px-4 py-3 bg-white shrink-0">
+<div class="flex gap-2">
+<input class="w-full bg-gray-50 border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-emerald-500 focus:border-emerald-500 shadow-sm" placeholder="Search or filter stories..." type="text"/>
+<button class="bg-emerald-500 hover:bg-emerald-600 text-white rounded-md w-10 h-10 flex items-center justify-center shrink-0 transition">
+<i class="fa-solid fa-plus"></i>
+</button>
+</div>
+</div>
+<!-- Scrollable Stories Grid -->
+<div class="flex-1 overflow-y-auto p-4 bg-white">
+<!-- Grid Container -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+<!-- Card 1: Active State -->
+<article class="p-4 rounded-lg border border-emerald-500 bg-emerald-50 shadow-sm relative group cursor-pointer hover:shadow-md transition">
+<h3 class="font-semibold text-gray-800 mb-2 leading-tight">Implement user authentication</h3>
+<div class="flex gap-2 mb-3">
+<span class="bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded font-medium">High</span>
+<span class="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded font-medium">8 pts</span>
+</div>
+<p class="text-xs text-gray-500 mb-8 line-clamp-3">Implement user authentication of authentication for uosed: ennt authentication...</p>
+<div class="flex justify-end gap-3 text-gray-400 text-xs mt-auto absolute bottom-4 right-4">
+<button class="hover:text-emerald-600"><i class="fa-solid fa-pen"></i></button>
+<button class="hover:text-red-500"><i class="fa-solid fa-trash"></i></button>
+<button class="hover:text-gray-600"><i class="fa-solid fa-arrows-up-down-left-right"></i></button>
+</div>
+<!-- Cursor hint for active selection -->
+<div class="absolute bottom-4 left-4 text-gray-400 opacity-50">
+<i class="fa-solid fa-hand-pointer"></i>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="p-4 rounded-lg border border-gray-200 bg-white hover:border-emerald-300 shadow-sm transition group cursor-pointer relative">
+<h3 class="font-semibold text-gray-800 mb-2 leading-tight">Implement user authentication</h3>
+<div class="flex gap-2 mb-3">
+<span class="bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded font-medium">Medium</span>
+<span class="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded font-medium">5 pts</span>
+</div>
+<p class="text-xs text-gray-500 mb-8 line-clamp-3">That elemes to rose authentication based on uswlr development backline.</p>
+<div class="flex justify-end gap-3 text-gray-400 text-xs mt-auto absolute bottom-4 right-4 transition">
+<button class="hover:text-emerald-600"><i class="fa-solid fa-pen"></i></button>
+<button class="hover:text-red-500"><i class="fa-solid fa-trash"></i></button>
+<button class="hover:text-gray-600"><i class="fa-solid fa-arrows-up-down-left-right"></i></button>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="p-4 rounded-lg border border-gray-200 bg-white hover:border-emerald-300 shadow-sm transition group cursor-pointer relative">
+<h3 class="font-semibold text-gray-800 mb-2 leading-tight">Implement user authentication</h3>
+<div class="flex gap-2 mb-3">
+<span class="bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded font-medium">High</span>
+<span class="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded font-medium">8 pts</span>
+</div>
+<p class="text-xs text-gray-500 mb-8 line-clamp-3">Implement user authentication aaaoiving auther information.</p>
+<div class="flex justify-end gap-3 text-gray-400 text-xs mt-auto absolute bottom-4 right-4 transition">
+<button class="hover:text-emerald-600"><i class="fa-solid fa-pen"></i></button>
+<button class="hover:text-red-500"><i class="fa-solid fa-trash"></i></button>
+<button class="hover:text-gray-600"><i class="fa-solid fa-arrows-up-down-left-right"></i></button>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="p-4 rounded-lg border border-gray-200 bg-white hover:border-emerald-300 shadow-sm transition group cursor-pointer relative">
+<h3 class="font-semibold text-gray-800 mb-2 leading-tight">Implement decoizo authentication</h3>
+<div class="flex gap-2 mb-3">
+<span class="bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded font-medium">Medium</span>
+<span class="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded font-medium">5 pts</span>
+</div>
+<p class="text-xs text-gray-500 mb-8 line-clamp-3">Develop arrosion of proseess with implement for sorice authentications wilen...</p>
+<div class="flex justify-end gap-3 text-gray-400 text-xs mt-auto absolute bottom-4 right-4 transition">
+<button class="hover:text-emerald-600"><i class="fa-solid fa-pen"></i></button>
+<button class="hover:text-red-500"><i class="fa-solid fa-trash"></i></button>
+<button class="hover:text-gray-600"><i class="fa-solid fa-arrows-up-down-left-right"></i></button>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- END: LeftColumn -->
+<!-- BEGIN: RightColumn (Charts & Sprint) -->
+<section class="flex flex-col w-7/12 gap-6 h-full overflow-hidden">
+<!-- Top Row: Capacity Charts -->
+<div class="h-5/12 grid grid-cols-2 gap-6">
+<!-- Dev Capacity Card -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 relative flex flex-col items-center">
+<!-- Header -->
+<div class="w-full flex justify-between items-start mb-2">
+<div class="flex items-center gap-2 text-xs font-bold text-gray-500 uppercase tracking-wide">
+<span class="text-emerald-500 font-bold">&lt;/&gt;</span>
+               DEV CAPACITY
+             </div>
+<button class="text-emerald-500 hover:text-emerald-700 transition"><i class="fa-solid fa-gear"></i></button>
+</div>
+<!-- Chart SVG -->
+<div class="flex-1 flex flex-col justify-center items-center w-full">
+<svg class="circular-chart w-48 h-48" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="100, 100"></path>
+<path class="circle" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke="#10b981" stroke-dasharray="65, 100"></path>
+<text class="percentage" x="18" y="20.35">65%</text>
+<text class="sub-text" x="18" y="26">Completed</text>
+</svg>
+<div class="mt-2 text-sm font-semibold text-gray-800">
+               71.5h <span class="text-gray-400 font-normal">/ 110h</span>
+</div>
+</div>
+<!-- Decorative background blob -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-emerald-50/50 rounded-bl-full pointer-events-none"></div>
+</div>
+<!-- QA Capacity Card -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 relative flex flex-col items-center">
+<!-- Header -->
+<div class="w-full flex justify-between items-start mb-2">
+<div class="flex items-center gap-2 text-xs font-bold text-gray-500 uppercase tracking-wide">
+<i class="fa-regular fa-circle-check text-emerald-500"></i>
+              QA CAPACITY
+            </div>
+</div>
+<!-- Chart SVG -->
+<div class="flex-1 flex flex-col justify-center items-center w-full">
+<svg class="circular-chart w-48 h-48" viewbox="0 0 36 36">
+<path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="100, 100"></path>
+<path class="circle" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke="#10b981" stroke-dasharray="40, 100"></path>
+<text class="percentage" x="18" y="20.35">40%</text>
+<text class="sub-text" x="18" y="26">Completed</text>
+</svg>
+<div class="mt-2 text-sm font-semibold text-gray-800">
+              20h <span class="text-gray-400 font-normal">/ 50h</span>
+</div>
+</div>
+<!-- Decorative background blob -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-emerald-50/50 rounded-bl-full pointer-events-none"></div>
+</div>
+</div>
+<!-- Bottom Row: Sprint Bucket -->
+<div class="h-7/12 bg-white rounded-xl shadow-sm border border-gray-200 flex flex-col overflow-hidden">
+<!-- Header -->
+<div class="p-5 pb-2 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<h2 class="text-emerald-500 font-bold text-lg">Sprint Bucket</h2>
+<span class="bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded font-medium">1 Items</span>
+</div>
+<button class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-rotate-right"></i></button>
+</div>
+<!-- Task Content Container -->
+<div class="p-6 pt-2 flex-1 overflow-y-auto">
+<!-- Main Task Card -->
+<div class="border border-gray-200 rounded-xl overflow-hidden shadow-sm bg-white border-l-[6px] border-l-emerald-500">
+<div class="flex-1 p-4">
+<!-- Task Header -->
+<div class="flex justify-between items-start mb-4">
+<div class="flex gap-3 w-full">
+<button class="text-gray-400 hover:text-gray-600 mt-1"><i class="fa-solid fa-chevron-down"></i></button>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-gray-800 text-lg">Tarefa 1</h3>
+<div class="flex items-center gap-3 text-gray-400">
+<button class="hover:text-emerald-600 transition"><i class="fa-solid fa-pen"></i></button>
+<button class="hover:text-emerald-600 transition"><i class="fa-regular fa-clone"></i></button>
+<button class="hover:text-red-500 transition"><i class="fa-solid fa-trash"></i></button>
+<button class="text-emerald-500 transition"><i class="fa-regular fa-circle-check"></i></button>
+</div>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="bg-gray-200 text-gray-600 text-[10px] px-2 py-0.5 rounded-sm uppercase font-semibold">User Story</span>
+<span class="bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded-full font-bold">pts</span>
+<span class="text-xs text-gray-500">1 tasks</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-gray-200 rounded-full mb-6 h-2">
+<div class="bg-emerald-500 h-2 rounded-full" style="width: 70%"></div>
+</div>
+<!-- Subtask Item -->
+<div class="flex items-center py-2 px-1 hover:bg-gray-50 rounded transition mb-2">
+<div class="flex items-center gap-3">
+<button class="text-gray-400 hover:text-emerald-500"><i class="fa-regular fa-circle"></i></button>
+<span class="text-xs font-medium text-blue-800 bg-blue-100 px-2 py-1 rounded">Dev</span>
+<span class="text-gray-800 font-medium">Sub 1</span>
+</div>
+<div class="ml-auto flex items-center gap-4 text-xs text-gray-500">
+<span>1h</span>
+<i class="fa-regular fa-circle-check text-emerald-500 text-base"></i>
+<span>2h</span>
+<i class="fa-regular fa-window-maximize"></i>
+<button class="text-gray-400 hover:text-red-500 text-base"><i class="fa-solid fa-xmark"></i></button>
+</div>
+</div>
+<!-- Footer / New Subtask -->
+<div class="mt-4 flex items-center bg-white rounded-lg border border-gray-300 shadow-sm overflow-hidden">
+<div class="relative border-r border-gray-200">
+<div class="flex items-center px-3 py-2 gap-1 cursor-pointer bg-gray-50 hover:bg-gray-100 transition">
+<span class="text-xs font-semibold text-gray-700">Dev</span>
+<i class="fa-solid fa-chevron-down text-[10px] text-gray-500"></i>
+</div>
+</div>
+<input class="flex-1 border-none text-sm focus:ring-0 text-gray-700 placeholder-gray-400 bg-transparent px-3 py-2" placeholder="New subtask..." type="text"/>
+<button class="bg-emerald-500 hover:bg-emerald-600 text-white w-9 h-full flex items-center justify-center transition shrink-0">
+<i class="fa-solid fa-plus"></i>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: RightColumn -->
+</main>
+<!-- END: MainContent -->
+</body></html>

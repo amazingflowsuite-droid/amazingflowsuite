@@ -21,6 +21,14 @@ export const DailyModule = () => {
     const [isSidebarOpen] = useState(true);
     const { startDaily, status, resetDaily, currentView, setCurrentView, tick, globalSecondsRemaining } = useDailyStore();
 
+    // Load Data
+    useEffect(() => {
+        const { fetchData, subscribeToChanges, unsubscribe } = useDailyStore.getState();
+        fetchData();
+        subscribeToChanges();
+        return () => unsubscribe();
+    }, []);
+
     // Global Timer Loop
     useEffect(() => {
         let interval: ReturnType<typeof setInterval>;

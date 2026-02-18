@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Amazing Planning - Scrum Dashboard</title>
+<!-- Load Tailwind CSS v3 with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration for Custom Colors and Fonts -->
+<script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              scrum: {
+                bg: '#F8F9FA',
+                primary: '#00C853', // Vibrant Green
+                primaryLight: '#E8F5E9',
+                textDark: '#333333',
+                textGrey: '#666666',
+                border: '#E5E7EB',
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'Roboto', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+<!-- Load Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Load FontAwesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- Custom CSS for specific component tweaks -->
+<style data-purpose="custom-overrides">
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .progress-stripe {
+           background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+           background-size: 1rem 1rem;
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden bg-gray-100 text-gray-800">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between shadow-sm z-10 shrink-0">
+<!-- Left: Logo and Title -->
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-scrum-primary rounded-md flex items-center justify-center text-white shadow-md">
+<i class="fa-solid fa-chart-simple text-xl"></i>
+</div>
+<div>
+<h1 class="text-lg font-bold leading-tight">Amazing Planning</h1>
+<p class="text-xs text-scrum-textGrey font-medium">Scrum Timekeeper</p>
+</div>
+</div>
+<!-- Right: Actions and Navigation -->
+<div class="flex items-center gap-4">
+<a class="text-scrum-textGrey hover:text-scrum-primary flex items-center gap-2 text-sm font-medium transition-colors" href="#">
+<i class="fa-regular fa-calendar"></i> Timeline
+            </a>
+<button class="px-4 py-1.5 border border-gray-300 rounded-full text-sm font-medium text-scrum-textGrey hover:border-scrum-primary hover:text-scrum-primary transition-colors bg-white shadow-sm rounded-md px-3 py-1 text-gray-700">
+                Report
+            </button>
+<div class="h-6 w-px bg-gray-300 mx-1"></div>
+<button class="text-scrum-textGrey hover:text-scrum-primary transition-colors">
+<i class="fa-solid fa-gear text-lg"></i>
+</button>
+<button class="text-scrum-textGrey hover:text-scrum-primary transition-colors">
+<i class="fa-regular fa-circle-question text-lg"></i>
+</button>
+<div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-xs font-bold border border-white shadow-sm ring-2 ring-gray-100 cursor-pointer">
+                JS
+            </div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 flex overflow-hidden p-6 gap-6">
+<!-- BEGIN: LeftColumn (Product Backlog) -->
+<section class="w-[35%] flex flex-col h-full bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" data-purpose="product-backlog">
+<!-- Header -->
+<div class="p-4 border-b border-gray-100 flex justify-between items-center bg-white sticky top-0 z-10">
+<h2 class="text-lg font-bold text-gray-800">Product Backlog</h2>
+<button class="text-xs font-medium text-scrum-textGrey border border-gray-200 px-3 py-1.5 rounded-md hover:bg-gray-50 flex items-center gap-2 transition-colors">
+<i class="fa-solid fa-file-import"></i> Import
+                </button>
+</div>
+<!-- Search Area -->
+<div class="p-4 bg-gray-50/50 border-b border-gray-100">
+<div class="flex shadow-sm rounded-md">
+<div class="relative flex-grow focus-within:z-10">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+<i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+</div>
+<input class="block w-full rounded-l-md border-0 py-2.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-scrum-primary sm:text-sm sm:leading-6" placeholder="Search or filter stories..." type="text"/>
+</div>
+<button class="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-4 py-2 text-sm font-semibold text-white bg-scrum-primary hover:bg-green-600 focus:z-10 ring-1 ring-inset ring-scrum-primary transition-colors" type="button">
+<i class="fa-solid fa-plus text-lg"></i>
+</button>
+</div>
+</div>
+<!-- Content Grid (Scrollable) -->
+<div class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/30 scrollbar-hide">
+<!-- Card 1: Active -->
+<article class="bg-green-50 border-2 border-green-400 rounded-lg p-4 shadow-sm relative group transition-all hover:shadow-md cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-bold text-gray-900 text-sm leading-snug">Implement user authentication</h3>
+<div class="flex gap-1">
+<span class="inline-flex items-center rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">High</span>
+<span class="inline-flex items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">8 pts</span>
+</div>
+</div>
+<p class="text-xs mb-4 line-clamp-3 text-gray-500">
+    Create login and registration endpoints, validate inputs, secure passwords with bcrypt, and issue JWT tokens for session...
+  </p>
+<div class="flex items-center justify-between border-t border-green-200 pt-3 mt-1">
+<div class="flex gap-3 text-gray-400">
+<button class="hover:text-green-600"><i class="fa-regular fa-hand-pointer"></i></button>
+<button class="hover:text-blue-500"><i class="fa-solid fa-pen"></i></button>
+<button class="hover:text-red-500"><i class="fa-regular fa-trash-can"></i></button>
+</div>
+<span class="text-gray-400 cursor-grab active:cursor-grabbing"><i class="fa-solid fa-grip-lines"></i></span>
+</div>
+</article>
+<!-- Card 2: Standard -->
+<article class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm relative group transition-all hover:shadow-md hover:border-gray-300">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-bold text-gray-800 text-sm leading-snug">Design dashboard layout</h3>
+<div class="flex gap-1">
+<span class="inline-flex items-center rounded-full bg-teal-50 px-2 py-0.5 text-xs font-medium text-teal-700">Medium</span>
+<span class="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600">5 pts</span>
+</div>
+</div>
+<p class="text-xs text-gray-500 mb-4 line-clamp-3">
+    Create a responsive layout structure using grid CSS. Implement sidebar navigation and top header bar.
+  </p>
+<div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-1">
+<div class="flex gap-3 text-gray-400">
+<button class="hover:text-blue-500 transition-colors"><i class="fa-solid fa-pen"></i></button>
+<button class="hover:text-red-500 transition-colors"><i class="fa-regular fa-trash-can"></i></button>
+</div>
+<span class="text-gray-300 cursor-grab hover:text-gray-500"><i class="fa-solid fa-grip-lines"></i></span>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm relative group transition-all hover:shadow-md hover:border-gray-300">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-bold text-gray-800 text-sm leading-snug">Implement decoizo auth</h3>
+<div class="flex gap-1">
+<span class="inline-flex items-center rounded-full bg-orange-50 px-2 py-0.5 text-xs font-medium text-orange-700">Low</span>
+<span class="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600">3 pts</span>
+</div>
+</div>
+<p class="text-xs text-gray-500 mb-4 line-clamp-3">
+    Integrate third-party provider for simplified login flow. Ensure callback URLs are properly configured.
+  </p>
+<div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-1">
+<div class="flex gap-3 text-gray-400">
+<button class="hover:text-blue-500 transition-colors"><i class="fa-solid fa-pen"></i></button>
+<button class="hover:text-red-500 transition-colors"><i class="fa-regular fa-trash-can"></i></button>
+</div>
+<span class="text-gray-300 cursor-grab hover:text-gray-500"><i class="fa-solid fa-grip-lines"></i></span>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm relative group transition-all hover:shadow-md hover:border-gray-300">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-bold text-gray-800 text-sm leading-snug">Refactor API middleware</h3>
+<div class="flex gap-1">
+<span class="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600">1 pts</span>
+</div>
+</div>
+<p class="text-xs text-gray-500 mb-4 line-clamp-3">
+    Clean up the request logging and error handling middleware.
+  </p>
+<div class="flex items-center justify-between border-t border-gray-100 pt-3 mt-1">
+<div class="flex gap-3 text-gray-400">
+<button class="hover:text-blue-500 transition-colors"><i class="fa-solid fa-pen"></i></button>
+<button class="hover:text-red-500 transition-colors"><i class="fa-regular fa-trash-can"></i></button>
+</div>
+<span class="text-gray-300 cursor-grab hover:text-gray-500"><i class="fa-solid fa-grip-lines"></i></span>
+</div>
+</article>
+</div>
+</section>
+<!-- END: LeftColumn -->
+<!-- BEGIN: RightColumn -->
+<section class="w-[65%] flex flex-col gap-6 h-full overflow-hidden">
+<!-- BEGIN: Capacity Section -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 shrink-0" data-purpose="capacity-stats"><div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Dev Capacity -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center text-sm font-semibold text-gray-700">
+<div class="flex items-center gap-2">
+<i class="fa-solid fa-code text-gray-400 text-xs"></i>
+<span>Dev Capacity</span>
+</div>
+<i class="fa-solid fa-gear text-gray-300 hover:text-gray-500 cursor-pointer text-xs"></i>
+</div>
+<div class="relative w-full h-4 bg-gray-100 rounded-full overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-scrum-primary progress-stripe" style="width: 65%"></div>
+</div>
+<div class="flex justify-end">
+<span class="text-xs font-medium text-gray-500">65% <span class="mx-1 text-gray-300">|</span> 71.5h / 110h</span>
+</div>
+</div>
+<!-- QA Capacity -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center text-sm font-semibold text-gray-700">
+<div class="flex items-center gap-2">
+<i class="fa-solid fa-check-circle text-gray-400 text-xs"></i>
+<span>QA Capacity</span>
+</div>
+<i class="fa-solid fa-gear text-gray-300 hover:text-gray-500 cursor-pointer text-xs"></i>
+</div>
+<div class="relative w-full h-4 bg-gray-100 rounded-full overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-scrum-primary progress-stripe opacity-80" style="width: 40%"></div>
+</div>
+<div class="flex justify-end">
+<span class="text-xs font-medium text-gray-500">40% <span class="mx-1 text-gray-300">|</span> 20h / 50h</span>
+</div>
+</div>
+</div></div>
+<!-- END: Capacity Section -->
+<!-- BEGIN: Sprint Bucket -->
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 flex flex-col flex-1 overflow-hidden" data-purpose="sprint-bucket">
+<!-- Bucket Header -->
+<div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center bg-white">
+<div class="flex items-center gap-3">
+<h2 class="text-lg font-bold text-gray-800">Sprint Bucket</h2>
+<span class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">1 items</span>
+</div>
+<button class="text-gray-400 hover:text-scrum-primary transition-colors hover:rotate-180 duration-300">
+<i class="fa-solid fa-arrows-rotate"></i>
+</button>
+</div>
+<!-- Bucket Content -->
+<div class="flex-1 overflow-y-auto p-6 bg-gray-50/30 scrollbar-hide space-y-4">
+<!-- Main Task Item (Expanded) -->
+<div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+<!-- Task Header -->
+<div class="p-4 flex flex-col gap-3 border-b border-gray-100 bg-white"><div class="flex justify-between items-start">
+<div class="flex items-center gap-2">
+<button class="text-gray-400 hover:text-gray-600 transition-colors">
+<i class="fa-solid fa-chevron-down"></i>
+</button>
+<h3 class="font-bold text-gray-800">Tarefa 1: Setup Development Environment</h3>
+</div>
+<div class="flex items-center gap-3 text-gray-400 text-sm">
+<button class="hover:text-blue-500"><i class="fa-solid fa-pen"></i></button>
+<button class="hover:text-purple-500"><i class="fa-regular fa-copy"></i></button>
+<button class="hover:text-red-500"><i class="fa-regular fa-trash-can"></i></button>
+<button class="text-scrum-primary"><i class="fa-solid fa-circle-check text-lg"></i></button>
+</div>
+</div>
+<div class="flex items-center gap-2 pl-6">
+<span class="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-bold text-gray-600 bg-gray-200/60 uppercase">USER STORY</span>
+<span class="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-bold text-blue-700 bg-blue-100">5 pts</span>
+<span class="text-xs text-gray-400 font-medium ml-1">1 tasks</span>
+</div>
+<div class="pl-6 pt-1">
+<div class="relative w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
+<div class="absolute top-0 left-0 h-full bg-scrum-primary" style="width: 25%"></div>
+</div>
+</div></div>
+<!-- Subtask List -->
+<div class="bg-gray-50/50"><!-- Subtask 1 -->
+<div class="flex items-center justify-between p-3 pl-10 hover:bg-white border-b border-gray-100 transition-colors group">
+<div class="flex items-center gap-3 flex-1">
+<input class="w-4 h-4 text-gray-300 border-gray-300 focus:ring-scrum-primary cursor-pointer" type="radio"/>
+<span class="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-bold text-blue-600 bg-blue-50 border border-blue-200/50 uppercase tracking-wide">Dev</span>
+<span class="text-sm text-gray-800 font-medium truncate">Install Node.js &amp; Dependencies</span>
+</div>
+<div class="flex items-center gap-4 text-sm shrink-0 min-w-[180px] justify-end">
+<span class="text-gray-500 font-mono text-xs bg-white px-2 py-0.5 rounded border border-gray-200">1h</span>
+<i class="fa-solid fa-check text-green-500"></i>
+<span class="text-gray-400 font-mono text-xs">2h</span>
+<i class="fa-regular fa-calendar text-gray-400 hover:text-blue-500 cursor-pointer"></i>
+<i class="fa-solid fa-xmark text-gray-400 hover:text-red-500 cursor-pointer text-lg"></i>
+</div>
+</div>
+<!-- Input Row -->
+<div class="flex items-center justify-between p-2 pl-10 bg-white border-b border-gray-100">
+<div class="flex items-center gap-2 w-full">
+<div class="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-bold text-blue-600 bg-blue-50 border border-blue-200/50 uppercase tracking-wide cursor-pointer">
+        DEV <i class="fa-solid fa-chevron-down ml-1 text-[8px]"></i>
+</div>
+<input class="flex-1 border-0 focus:ring-0 text-sm py-1 placeholder-gray-300 bg-transparent" placeholder="New subtask..." type="text"/>
+</div>
+<button class="ml-4 bg-scrum-primary text-white w-7 h-7 rounded flex items-center justify-center hover:bg-green-600 transition-colors shadow-sm">
+<i class="fa-solid fa-plus text-sm"></i>
+</button>
+</div>
+<!-- Subtask 2 -->
+<div class="flex items-center justify-between p-3 pl-10 hover:bg-white border-b border-gray-100 transition-colors group">
+<div class="flex items-center gap-3 flex-1">
+<input class="w-4 h-4 text-gray-300 border-gray-300 focus:ring-scrum-primary cursor-pointer" type="radio"/>
+<span class="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-bold text-blue-600 bg-blue-50 border border-blue-200/50 uppercase tracking-wide">Dev</span>
+<span class="text-sm text-gray-800 font-medium truncate">Configure ESLint &amp; Prettier</span>
+</div>
+<div class="flex items-center gap-4 text-sm shrink-0 min-w-[180px] justify-end">
+<span class="text-gray-500 font-mono text-xs bg-white px-2 py-0.5 rounded border border-gray-200">1h</span>
+<i class="fa-solid fa-check text-green-500"></i>
+<span class="text-gray-400 font-mono text-xs">2h</span>
+<i class="fa-regular fa-calendar text-gray-400 hover:text-blue-500 cursor-pointer"></i>
+<i class="fa-solid fa-xmark text-gray-400 hover:text-red-500 cursor-pointer text-lg"></i>
+</div>
+</div>
+<!-- Subtask 3 -->
+<div class="flex items-center justify-between p-3 pl-10 hover:bg-white transition-colors group">
+<div class="flex items-center gap-3 flex-1">
+<input class="w-4 h-4 text-gray-300 border-gray-300 focus:ring-scrum-primary cursor-pointer" type="radio"/>
+<span class="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-bold text-blue-600 bg-blue-50 border border-blue-200/50 uppercase tracking-wide">Dev</span>
+<span class="text-sm text-gray-800 font-medium truncate">Create Github Repo</span>
+</div>
+<div class="flex items-center gap-4 text-sm shrink-0 min-w-[180px] justify-end">
+<span class="text-gray-500 font-mono text-xs bg-white px-2 py-0.5 rounded border border-gray-200">0.5h</span>
+<i class="fa-solid fa-check text-green-500"></i>
+<span class="text-gray-400 font-mono text-xs">0.5h</span>
+<i class="fa-regular fa-calendar text-gray-400 hover:text-blue-500 cursor-pointer"></i>
+<i class="fa-solid fa-xmark text-gray-400 hover:text-red-500 cursor-pointer text-lg"></i>
+</div>
+</div></div>
+</div>
+<!-- Secondary Task Item (Collapsed) -->
+<div class="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow"><div class="p-4 flex flex-col gap-1 bg-white cursor-pointer hover:bg-gray-50/50 transition-colors">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<button class="text-gray-400 hover:text-gray-600 transition-colors">
+<i class="fa-solid fa-chevron-right"></i>
+</button>
+<h3 class="font-medium text-gray-800">Tarefa 2: Database Schema Design</h3>
+</div>
+<div class="flex items-center gap-3 text-gray-300 text-sm">
+<span class="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-bold text-gray-600 bg-gray-200/60 uppercase">USER STORY</span>
+<span class="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-bold text-blue-700 bg-blue-100">8 pts</span>
+<div class="h-4 w-px bg-gray-200 mx-1"></div>
+<button class="hover:text-blue-500"><i class="fa-solid fa-pen"></i></button>
+<button class="hover:text-purple-500"><i class="fa-regular fa-copy"></i></button>
+<button class="hover:text-red-500"><i class="fa-regular fa-trash-can"></i></button>
+<button class="hover:text-scrum-primary"><i class="fa-regular fa-circle-check text-lg"></i></button>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+<!-- END: Sprint Bucket -->
+</section>
+<!-- END: RightColumn -->
+</main>
+<!-- END: MainContent -->
+</body></html>
