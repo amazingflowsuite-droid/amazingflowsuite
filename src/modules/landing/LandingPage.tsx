@@ -98,7 +98,7 @@ export const LandingPage = () => {
                             <div className="relative animate-in slide-in-from-right duration-1000 delay-200">
                                 <div className="absolute -inset-4 bg-gradient-to-r from-[#2EBD85]/20 to-blue-500/20 rounded-full blur-3xl -z-10"></div>
                                 <img
-                                    src="/src/modules/landing/hero_premium_variant.png"
+                                    src="/assets/hero_premium_variant.png"
                                     alt="Amazing Flow Dashboard 3D"
                                     className="relative w-full h-auto drop-shadow-2xl hover:scale-[1.02] transition-transform duration-500"
                                 />
@@ -139,7 +139,7 @@ export const LandingPage = () => {
                                     </ul>
                                 </CardContent>
                                 <CardFooter className="pt-0">
-                                    <Button asChild className="w-full h-12 rounded-xl text-white bg-gray-900 hover:bg-gray-800 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                                    <Button asChild className="w-full h-12 rounded-xl text-white bg-gray-900 hover:bg-gray-800 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-300 lg:translate-y-2 lg:group-hover:translate-y-0">
                                         <Link to="/daily">Open Daily</Link>
                                     </Button>
                                 </CardFooter>
@@ -167,7 +167,7 @@ export const LandingPage = () => {
                                     </ul>
                                 </CardContent>
                                 <CardFooter className="pt-0">
-                                    <Button asChild className="w-full h-12 rounded-xl text-white bg-gray-900 hover:bg-gray-800 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                                    <Button asChild className="w-full h-12 rounded-xl text-white bg-gray-900 hover:bg-gray-800 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-300 lg:translate-y-2 lg:group-hover:translate-y-0">
                                         <Link to="/kanban">Open Kanban</Link>
                                     </Button>
                                 </CardFooter>
@@ -195,7 +195,7 @@ export const LandingPage = () => {
                                     </ul>
                                 </CardContent>
                                 <CardFooter className="pt-0">
-                                    <Button asChild className="w-full h-12 rounded-xl text-white bg-gray-900 hover:bg-gray-800 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                                    <Button asChild className="w-full h-12 rounded-xl text-white bg-gray-900 hover:bg-gray-800 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-300 lg:translate-y-2 lg:group-hover:translate-y-0">
                                         <Link to="/planning">Open Planning</Link>
                                     </Button>
                                 </CardFooter>
@@ -223,7 +223,7 @@ export const LandingPage = () => {
                                     </ul>
                                 </CardContent>
                                 <CardFooter className="pt-0">
-                                    <Button asChild className="w-full h-12 rounded-xl text-white bg-gray-900 hover:bg-gray-800 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                                    <Button asChild className="w-full h-12 rounded-xl text-white bg-gray-900 hover:bg-gray-800 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-300 lg:translate-y-2 lg:group-hover:translate-y-0">
                                         <Link to="/retro">Open Retro</Link>
                                     </Button>
                                 </CardFooter>
@@ -251,7 +251,7 @@ export const LandingPage = () => {
                                     </ul>
                                 </CardContent>
                                 <CardFooter className="pt-0">
-                                    <Button asChild className="w-full h-12 rounded-xl text-white bg-gray-900 hover:bg-gray-800 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                                    <Button asChild className="w-full h-12 rounded-xl text-white bg-gray-900 hover:bg-gray-800 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-300 lg:translate-y-2 lg:group-hover:translate-y-0">
                                         <Link to="/metrics">Open Metrics</Link>
                                     </Button>
                                 </CardFooter>
@@ -279,7 +279,7 @@ export const LandingPage = () => {
                                     </ul>
                                 </CardContent>
                                 <CardFooter className="pt-0">
-                                    <Button asChild className="w-full h-12 rounded-xl text-white bg-gray-900 hover:bg-gray-800 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                                    <Button asChild className="w-full h-12 rounded-xl text-white bg-gray-900 hover:bg-gray-800 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-300 lg:translate-y-2 lg:group-hover:translate-y-0">
                                         <Link to="/learning">Open Learning</Link>
                                     </Button>
                                 </CardFooter>

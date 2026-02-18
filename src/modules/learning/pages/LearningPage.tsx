@@ -95,7 +95,7 @@ export default function LearningPage() {
                 <div className="w-full max-w-6xl bg-slate-950 rounded-xl shadow-2xl overflow-hidden border border-slate-800 flex flex-col md:flex-row min-h-[600px]">
 
                     {/* Sidebar / Minimap (Prize Ladder) */}
-                    <aside className="w-full md:w-80 bg-slate-900 border-r border-slate-800 flex flex-col">
+                    <aside className="hidden md:flex w-full md:w-80 bg-slate-900 border-r border-slate-800 flex-col">
                         <div className="p-4 border-b border-slate-800 flex items-center gap-2">
                             <div className="flex gap-1.5">
                                 <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
