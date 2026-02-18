@@ -33,7 +33,9 @@ export function QuestionCard({ question, questionNumber }: QuestionCardProps) {
                     <span className="text-pink-500 mr-2">const</span>
                     problem
                     <span className="text-pink-500 mx-2">=</span>
-                    <span className="text-yellow-200">"{question.text}"</span>;
+                    <span className="text-yellow-200">
+                        "{typeof question.text === 'string' ? question.text : (question.text as any)['pt'] || 'Error'}"
+                    </span>;
                 </h2>
             </div>
         </motion.div>

@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Flag, List, Maximize2, ChevronLeft, ChevronRight, CheckCircle, XCircle } from 'lucide-react';
+import { Flag, List, ChevronLeft, ChevronRight, CheckCircle, XCircle } from 'lucide-react';
 import { useSimulatorState } from '../hooks/useSimulatorState';
-import { motion, AnimatePresence } from 'framer-motion';
 
 export const SimulatorPage: React.FC = () => {
     const navigate = useNavigate();

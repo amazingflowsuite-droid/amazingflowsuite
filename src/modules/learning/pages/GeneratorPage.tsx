@@ -243,7 +243,7 @@ export default function GeneratorPage() {
             const dbPayload = QUESTIONS.map(q => ({
                 text: q.text,
                 options: q.options,
-                correct_option_index: q.correctOptionIndex,
+                correct_option_index: parseInt(q.correctAnswer),
                 correct_details: q.correctDetails,
                 difficulty: q.difficulty
             }));
