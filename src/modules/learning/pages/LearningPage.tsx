@@ -134,7 +134,7 @@ export default function LearningPage() {
                     {/* Main Code Area */}
                     <div className="flex-1 flex flex-col relative bg-slate-950/50">
                         {/* Tab Bar mimic */}
-                        <div className="h-10 bg-slate-950 border-b border-slate-800 flex items-center px-4 gap-2">
+                        <div className="sticky top-0 z-20 h-10 bg-slate-950 border-b border-slate-800 flex items-center px-4 gap-2 shadow-md">
                             <div className="px-3 py-1 bg-slate-900 border-t-2 border-pink-500 text-slate-300 text-xs font-mono rounded-t-md flex items-center gap-2">
                                 <Terminal size={12} className="text-pink-400" />
                                 index.tsx
@@ -150,7 +150,7 @@ export default function LearningPage() {
                         </div>
 
                         {/* Content Area */}
-                        <div className="flex-1 p-6 md:p-10 flex flex-col items-center justify-center relative overflow-hidden">
+                        <div className="flex-1 p-4 md:p-10 flex flex-col items-center justify-start md:justify-center relative overflow-y-auto custom-scrollbar">
                             {/* Background decoration */}
                             <div className="absolute inset-0 opacity-5 pointer-events-none">
                                 <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
@@ -163,9 +163,9 @@ export default function LearningPage() {
                                         initial={{ opacity: 0, scale: 0.95 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.95 }}
-                                        className="w-full max-w-3xl z-10"
+                                        className="w-full max-w-3xl z-10 pt-4 md:pt-0 pb-20 md:pb-0"
                                     >
-                                        <div className="mb-4">
+                                        <div className="mb-4 sticky top-2 z-30 md:static">
                                             <Lifelines
                                                 lifelines={gameState.lifelines}
                                                 onUse={useLifeline}
